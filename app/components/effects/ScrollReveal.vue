@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 interface Props {
   text: string
@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const containerRef = ref<HTMLElement | null>(null)
 const progress = ref(0)
-const words = props.text.split(' ')
+const words = computed(() => props.text.split(' '))
 
 function handleScroll() {
   if (!containerRef.value) return

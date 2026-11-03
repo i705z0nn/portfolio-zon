@@ -7,6 +7,8 @@ import { Card, CardContent } from '~/components/ui/card'
 import { Badge } from '~/components/ui/badge'
 import type { GuestMessage } from '~/composables/useChat'
 
+const { t } = useI18n()
+
 const { messages, connected, error, connect, disconnect, sendMessage } = useChat()
 
 const form = reactive({
@@ -94,10 +96,10 @@ watch(
   <section id="guestbook" class="py-16 sm:py-24">
     <div class="container mx-auto px-4 max-w-4xl">
       <h2 class="mb-2 text-2xl font-bold tracking-tight text-center">
-        <EffectsGlitchText text="Guest Book" class="retro-glow" :continuous="false" intensity="low" />
+        <EffectsGlitchText :text="t('guestbookTitle')" class="retro-glow" :continuous="false" intensity="low" />
       </h2>
       <p class="mb-8 text-center text-muted-foreground font-display text-lg">
-        <EffectsScrambledText text="Leave a message, say hello!" :speed="40" />
+        <EffectsScrambledText :text="t('guestbookSubtitle')" :speed="40" />
       </p>
 
       <Card class="border-primary/20 overflow-hidden">
@@ -105,7 +107,7 @@ watch(
         <div class="flex items-center justify-between border-b border-primary/10 bg-muted/20 px-4 py-3">
           <div class="flex items-center gap-2">
             <MessageCircle class="h-4 w-4 text-primary" />
-            <span class="text-sm font-retro text-primary">Live Chat</span>
+            <span class="text-sm font-retro text-primary">{{ t('guestbookLiveChat') }}</span>
           </div>
           <div class="flex items-center gap-3">
             <div class="flex items-center gap-1.5">
@@ -121,7 +123,7 @@ watch(
                 />
               </span>
               <span class="text-xs text-muted-foreground">
-                {{ connected ? 'Connected' : 'Connecting...' }}
+                {{ connected ? t('guestbookConnected') : t('guestbookConnecting') }}
               </span>
             </div>
           </div>
@@ -136,13 +138,13 @@ watch(
           <!-- Empty state -->
           <div v-if="messages.length === 0 && connected" class="flex flex-col items-center justify-center h-full text-muted-foreground">
             <MessageCircle class="h-12 w-12 mb-3 opacity-30" />
-            <p class="text-sm">No messages yet. Be the first to say hello!</p>
+            <p class="text-sm">{{ t('guestbookEmpty') }}</p>
           </div>
 
           <!-- Loading state -->
           <div v-if="!connected" class="flex flex-col items-center justify-center h-full text-muted-foreground">
             <div class="h-6 w-6 border-2 border-primary/30 border-t-primary rounded-full animate-spin mb-3" />
-            <p class="text-sm">Connecting...</p>
+            <p class="text-sm">{{ t('guestbookConnecting') }}</p>
           </div>
 
           <!-- Message bubbles -->
@@ -181,7 +183,7 @@ watch(
                 >
                   <!-- Show what this is replying to -->
                   <div v-if="msg.replyToId" class="mb-1.5 rounded-md bg-background/50 border-l-2 border-primary/30 px-2 py-1 text-xs text-muted-foreground">
-                    ↩ Reply to a message
+                    {{ t('guestbookReplyTo') }}
                   </div>
                   {{ msg.content }}
                 </div>
@@ -192,7 +194,7 @@ watch(
                   @click="handleReply(msg)"
                 >
                   <Reply class="h-3 w-3" />
-                  Reply
+                  {{ t('guestbookReply') }}
                 </button>
 
                 <!-- Replies nested under this message -->
@@ -258,7 +260,7 @@ watch(
         <div v-if="replyingTo" class="flex items-center gap-2 px-4 py-2 bg-primary/5 border-t border-primary/10">
           <Reply class="h-3.5 w-3.5 text-primary" />
           <span class="text-xs text-muted-foreground flex-1 truncate">
-            Replying to <strong class="text-foreground">{{ replyingTo.name }}</strong>: {{ replyingTo.content }}
+            {{ t('guestbookReplyingTo') }} <strong class="text-foreground">{{ replyingTo.name }}</strong>: {{ replyingTo.content }}
           </span>
           <button class="text-xs text-muted-foreground hover:text-foreground" @click="cancelReply">✕</button>
         </div>
@@ -269,7 +271,7 @@ watch(
             <div class="flex gap-3">
               <Input
                 v-model="form.name"
-                placeholder="Your name"
+                :placeholder="t('guestbookYourName')"
                 class="max-w-35 text-sm"
                 maxlength="50"
                 required
@@ -277,7 +279,7 @@ watch(
               <div class="relative flex-1">
                 <Input
                   v-model="form.content"
-                  placeholder="Type a message..."
+                  :placeholder="t('guestbookTypeMessage')"
                   class="pr-12 text-sm"
                   maxlength="500"
                   required
@@ -295,7 +297,7 @@ watch(
               </div>
             </div>
             <p class="text-[10px] text-muted-foreground">
-              {{ form.content.length }}/500 · Messages are public and visible to everyone
+              {{ form.content.length }}/500 · {{ t('guestbookPublicNote') }}
             </p>
           </form>
         </CardContent>

@@ -2,7 +2,7 @@
 useHead({
   title: 'Portfolio Zon',
   meta: [
-    { name: 'description', content: 'Fresh graduate with experience in backend development, API design, database management, and IoT-based solutions.' },
+    { name: 'description', content: 'Fresh graduate with experience in backend development, API design, database management, IT system troubleshooting, website programming, and IoT-based solutions.' },
   ],
 })
 </script>

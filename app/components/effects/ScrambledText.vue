@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 
 interface Props {
   text: string
@@ -17,12 +17,15 @@ const props = withDefaults(defineProps<Props>(), {
 
 const displayText = ref(props.text.replace(/./g, ' '))
 const containerRef = ref<HTMLElement | null>(null)
+let scrambleInterval: ReturnType<typeof setInterval> | null = null
+let hasScrambled = false
 
 function scramble() {
+  if (scrambleInterval) clearInterval(scrambleInterval)
   const original = props.text
   let iteration = 0
 
-  const interval = setInterval(() => {
+  scrambleInterval = setInterval(() => {
     displayText.value = original
       .split('')
       .map((char, index) => {
@@ -36,13 +39,23 @@ function scramble() {
 
     if (iteration >= original.length) {
       displayText.value = original
-      clearInterval(interval)
+      if (scrambleInterval) clearInterval(scrambleInterval)
+      scrambleInterval = null
     }
   }, props.speed)
 }
 
+// Re-scramble when text changes (e.g. language toggle)
+watch(
+  () => props.text,
+  () => {
+    if (hasScrambled) scramble()
+  },
+)
+
 onMounted(() => {
   if (!props.animateOnView) {
+    hasScrambled = true
     scramble()
     return
   }
@@ -50,6 +63,7 @@ onMounted(() => {
   const observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {
+        hasScrambled = true
         scramble()
         observer.disconnect()
       }
@@ -60,6 +74,10 @@ onMounted(() => {
   if (containerRef.value) {
     observer.observe(containerRef.value)
   }
+})
+
+onUnmounted(() => {
+  if (scrambleInterval) clearInterval(scrambleInterval)
 })
 </script>
 

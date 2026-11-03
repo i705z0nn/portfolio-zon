@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { Menu, X, Sun, Moon } from 'lucide-vue-next'
+import { Menu, X, Sun, Moon, Languages } from 'lucide-vue-next'
 import { Button } from '~/components/ui/button'
 
 const isMobileMenuOpen = ref(false)
 const { theme, toggleTheme } = useTheme()
+const { locale, toggleLocale, t } = useI18n()
 
 function closeMobileMenu() {
   isMobileMenuOpen.value = false
@@ -51,13 +52,13 @@ onUnmounted(() => {
   if (glitchTimer) clearTimeout(glitchTimer)
 })
 
-const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Guest Book', href: '#guestbook' },
-  { label: 'Contact', href: '#contact' },
-]
+const navLinks = computed(() => [
+  { label: t('navAbout'), href: '#about' },
+  { label: t('navProjects'), href: '#projects' },
+  { label: t('navSkills'), href: '#skills' },
+  { label: t('navGuestBook'), href: '#guestbook' },
+  { label: t('navContact'), href: '#contact' },
+])
 </script>
 
 <template>
@@ -104,6 +105,23 @@ const navLinks = [
           </template>
         </ClientOnly>
 
+        <!-- Language toggle -->
+        <ClientOnly>
+          <Button
+            variant="ghost"
+            size="icon"
+            class="h-8 w-8 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10"
+            :aria-label="locale === 'en' ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'"
+            :title="locale === 'en' ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'"
+            @click="toggleLocale"
+          >
+            <Languages class="h-4 w-4" />
+          </Button>
+          <template #fallback>
+            <span class="h-8 w-8" aria-hidden="true" />
+          </template>
+        </ClientOnly>
+
         <!-- Mobile hamburger -->
         <button
           class="inline-flex md:hidden items-center justify-center rounded-full h-8 w-8 text-foreground hover:bg-accent transition-colors"
@@ -113,6 +131,20 @@ const navLinks = [
           <X v-if="isMobileMenuOpen" class="h-4 w-4" />
           <Menu v-else class="h-4 w-4" />
         </button>
+
+        <!-- Language toggle (mobile) -->
+        <ClientOnly>
+          <button
+            class="inline-flex md:hidden items-center justify-center rounded-full h-8 w-8 text-foreground hover:bg-accent transition-colors"
+            :aria-label="locale === 'en' ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'"
+            @click="toggleLocale"
+          >
+            <Languages class="h-4 w-4" />
+          </button>
+          <template #fallback>
+            <span class="h-8 w-8 md:hidden" aria-hidden="true" />
+          </template>
+        </ClientOnly>
 
         <!-- Theme toggle (mobile) -->
         <ClientOnly>

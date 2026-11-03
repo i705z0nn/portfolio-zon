@@ -2,6 +2,8 @@
 import { Github, ExternalLink } from 'lucide-vue-next'
 import type { ApiProject } from '~/composables/usePublicApi'
 
+const { t, locale } = useI18n()
+
 const { fetchProjects } = usePublicApi()
 const projects = ref<ApiProject[]>([])
 const isVisible = ref(false)
@@ -9,6 +11,27 @@ const sectionRef = ref<HTMLElement | null>(null)
 const scrollRef = ref<HTMLElement | null>(null)
 const scrollProgress = ref(0)
 const activeIndex = ref(0)
+
+// Indonesian translations for project descriptions (fallback: DB description)
+const projectDescId: Record<string, string> = {
+  'New Arsipku':
+    'Sistem tata naskah modern untuk AirNav Indonesia yang dibangun dengan NestJS, meningkatkan performa, skalabilitas, dan kemudahan perawatan untuk komunikasi resmi internal dan eksternal sehari-hari.',
+  'NavEvent':
+    'Platform digital untuk efisiensi dan transparansi dalam mengelola kegiatan AirNav Indonesia. Memungkinkan alur kerja paperless real-time, percepatan distribusi sertifikat, dan dashboard real-time.',
+  'HydroEye':
+    'Sistem penghitungan benih ikan otomatis menggunakan YOLOv5, Orange Pi Zero 3, dan kamera statis, mencapai akurasi deteksi 95–97% dengan monitoring real-time dan ekspor ke Google Sheets.',
+  'IoT Hydroponic Monitor':
+    'Website berbasis IoT menggunakan JavaScript, Firebase, dan Next.js untuk mengintegrasikan monitoring perangkat keras dengan antarmuka web responsif dan tampilan data sensor real-time via ESP8266.',
+  'Kanzon':
+    'Kanzon adalah aplikasi manajemen proyek berbasis Kanban yang dirancang untuk membantu tim mengelola workspace, proyek, tugas, anggota tim, alur review, notifikasi, dan analitik dalam satu platform.',
+}
+
+function projectDescription(project: ApiProject): string {
+  if (locale.value === 'id' && projectDescId[project.title]) {
+    return projectDescId[project.title]!
+  }
+  return project.description
+}
 
 // Tech icon map
 const techIconMap: Record<string, string> = {
@@ -134,10 +157,10 @@ onMounted(async () => {
     <div class="container mx-auto px-4 max-w-7xl">
       <!-- Heading -->
       <h2 class="mb-2 text-2xl font-bold tracking-tight text-center">
-        <EffectsGlitchText text="Projects" class="retro-glow" :continuous="false" intensity="low" />
+        <EffectsGlitchText :text="t('projectsTitle')" class="retro-glow" :continuous="false" intensity="low" />
       </h2>
       <p class="mb-10 sm:mb-14 text-center text-muted-foreground font-display text-lg">
-        <EffectsScrambledText text="Some things I've built" :speed="40" />
+        <EffectsScrambledText :text="t('projectsSubtitle')" :speed="40" />
       </p>
 
       <!-- Scroll showcase wrapper -->
@@ -170,7 +193,7 @@ onMounted(async () => {
 
                 <!-- Description -->
                 <p class="text-sm text-muted-foreground/80 leading-relaxed font-mono mb-5 max-w-md">
-                  {{ project.description }}
+                  {{ projectDescription(project) }}
                 </p>
 
                 <!-- Feature bullets (parse sentences from description) -->
@@ -181,7 +204,7 @@ onMounted(async () => {
                     class="flex items-start gap-2 text-sm text-muted-foreground/70 font-mono"
                   >
                     <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/70 shrink-0" />
-                    <span>Built with <span class="text-primary/80">{{ tech }}</span></span>
+                    <span>{{ t('projectsBuiltWith') }} <span class="text-primary/80">{{ tech }}</span></span>
                   </li>
                 </ul>
 
@@ -212,7 +235,7 @@ onMounted(async () => {
                     class="project-link"
                   >
                     <Github class="h-4 w-4" />
-                    <span>Source</span>
+                    <span>{{ t('projectsSource') }}</span>
                   </a>
                   <a
                     v-if="project.liveUrl"
@@ -222,7 +245,7 @@ onMounted(async () => {
                     class="project-link project-link--primary"
                   >
                     <ExternalLink class="h-4 w-4" />
-                    <span>Live Demo</span>
+                    <span>{{ t('projectsLiveDemo') }}</span>
                   </a>
                 </div>
               </div>
@@ -304,7 +327,7 @@ onMounted(async () => {
       <p v-if="projects.length > 0" class="text-center text-xs text-muted-foreground font-mono mt-6">
         {{ activeIndex + 1 }}
         <span class="text-primary/50">/</span>
-        {{ projects.length }} projects
+        {{ projects.length }} {{ t('projectsCounter') }}
       </p>
     </div>
   </section>

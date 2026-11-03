@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ArrowDown, Download } from 'lucide-vue-next'
 import { Button } from '~/components/ui/button'
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -16,7 +18,7 @@ import { Button } from '~/components/ui/button'
         </div>
 
         <p class="mb-4 text-lg text-muted-foreground font-display">
-          <EffectsBlurText text="Hello, I'm" :delay="200" :duration="800" />
+          <EffectsBlurText :text="t('heroGreeting')" :delay="200" :duration="800" />
         </p>
 
         <h1 class="mb-6 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
@@ -31,23 +33,23 @@ import { Button } from '~/components/ui/button'
 
         <p class="mx-auto lg:mx-0 mb-2 max-w-2xl text-xl text-muted-foreground font-display">
           <EffectsBlurText
-            text="A Sofware Engineer with experience in API design, database management, and IoT-based solutions."
+            :text="t('heroDesc')"
             :delay="600"
             :duration="1500"
           />
         </p>
 
         <p class="mb-8">
-          <EffectsShinyText text="> Open to new opportunities_" :speed="3" class="text-sm font-mono retro-glow-cyan" />
+          <EffectsShinyText :text="t('heroTagline')" :speed="3" class="text-sm font-mono retro-glow-cyan" />
         </p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
           <Button as="a" href="#projects" size="lg" class="retro-pixel-border font-retro text-xs uppercase tracking-widest">
-            View Projects
+            {{ t('heroViewProjects') }}
           </Button>
           <Button as="a" href="/cv.pdf" download variant="outline" size="lg" class="retro-pixel-border font-retro text-xs uppercase tracking-widest">
             <Download class="h-4 w-4 mr-2" />
-            My Resume
+            {{ t('heroMyResume') }}
           </Button>
         </div>
       </div>
@@ -69,7 +71,7 @@ import { Button } from '~/components/ui/button'
       <a
         href="#about"
         class="inline-flex animate-bounce text-primary retro-glow transition-colors"
-        aria-label="Scroll to about"
+        :aria-label="t('heroScrollToAbout')"
       >
         <ArrowDown class="h-6 w-6" />
       </a>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { ApiSkillCategory } from '~/composables/usePublicApi'
 
+const { t } = useI18n()
+
 const { fetchSkills, fetchExperiences } = usePublicApi()
 
 const skillCategories = ref<ApiSkillCategory[]>([])
@@ -210,25 +212,25 @@ const orbitIcons = computed(() => {
           <p class="text-2xl sm:text-3xl font-bold text-primary retro-glow">
             <EffectsCountUp :target="totalSkills" :duration="2000" suffix="+" />
           </p>
-          <p class="text-xs sm:text-sm text-muted-foreground font-display">Technologies</p>
+          <p class="text-xs sm:text-sm text-muted-foreground font-display">{{ t('skillsTechnologies') }}</p>
         </div>
         <div class="rounded-lg border border-primary/20 bg-card p-4 text-center shadow-sm retro-box-glow">
           <p class="text-2xl sm:text-3xl font-bold text-primary retro-glow">
             <EffectsCountUp :target="15" :duration="2000" suffix="+" />
           </p>
-          <p class="text-xs sm:text-sm text-muted-foreground font-display">Projects</p>
+          <p class="text-xs sm:text-sm text-muted-foreground font-display">{{ t('skillsProjects') }}</p>
         </div>
         <div class="rounded-lg border border-primary/20 bg-card p-4 text-center shadow-sm retro-box-glow">
           <p class="text-2xl sm:text-3xl font-bold text-primary retro-glow">
             <EffectsCountUp :target="totalInternships" :duration="2000" suffix="+" />
           </p>
-          <p class="text-xs sm:text-sm text-muted-foreground font-display">Internships</p>
+          <p class="text-xs sm:text-sm text-muted-foreground font-display">{{ t('skillsInternships') }}</p>
         </div>
         <div class="rounded-lg border border-primary/20 bg-card p-4 text-center shadow-sm retro-box-glow">
           <p class="text-2xl sm:text-3xl font-bold text-primary retro-glow">
             <EffectsCountUp :target="totalCertifications" :duration="2500" />
           </p>
-          <p class="text-xs sm:text-sm text-muted-foreground font-display">BNSP Certifications</p>
+          <p class="text-xs sm:text-sm text-muted-foreground font-display">{{ t('skillsCertifications') }}</p>
         </div>
       </div>
 

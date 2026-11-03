@@ -2,6 +2,8 @@
 import { Github, Linkedin, Mail, Home } from 'lucide-vue-next'
 import { markRaw } from 'vue'
 
+const { t } = useI18n()
+
 const dockItems = [
   { icon: markRaw(Home), label: 'Home', href: '#hero' },
   { icon: markRaw(Github), label: 'GitHub', href: 'https://github.com/i705z0nn' },
@@ -20,12 +22,12 @@ const dockItems = [
 
       <div class="flex flex-col items-center justify-center gap-2 text-center">
         <p class="text-xs text-muted-foreground font-mono">
-          Built with <span class="text-primary font-medium">Nuxt.js</span>,
+          {{ t('footerBuiltWith') }} <span class="text-primary font-medium">Nuxt.js</span>,
           <span class="text-primary font-medium">Tailwind CSS</span> &
           <span class="text-primary font-medium">Shadcn UI</span>
         </p>
         <p class="text-xs text-muted-foreground font-mono">
-          &copy; {{ new Date().getFullYear() }} Muhammad Fakhri Alauddin. All rights reserved.
+          &copy; {{ new Date().getFullYear() }} Muhammad Fakhri Alauddin. {{ t('footerRights') }}
           <NuxtLink
             to="/admin"
             class="secret-link"

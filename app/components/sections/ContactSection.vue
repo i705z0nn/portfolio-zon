@@ -6,6 +6,7 @@ import { Textarea } from '~/components/ui/textarea'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '~/components/ui/card'
 
 const { sendContactMessage } = usePublicApi()
+const { t } = useI18n()
 
 const form = reactive({
   name: '',
@@ -23,14 +24,14 @@ async function handleSubmit() {
   statusType.value = ''
   try {
     await sendContactMessage({ ...form })
-    statusMessage.value = 'Thank you for your message! I will get back to you soon.'
+    statusMessage.value = t('contactSuccess')
     statusType.value = 'success'
     form.name = ''
     form.email = ''
     form.message = ''
   } catch (e: any) {
     console.error('Failed to send message:', e)
-    statusMessage.value = 'Failed to send message. Please try again later.'
+    statusMessage.value = t('contactError')
     statusType.value = 'error'
   } finally {
     sending.value = false
@@ -42,19 +43,19 @@ async function handleSubmit() {
   <section id="contact" class="py-16 sm:py-24 bg-muted/30">
     <div class="container mx-auto px-4 max-w-6xl">
       <h2 class="mb-2 text-2xl font-bold tracking-tight text-center">
-        <EffectsGlitchText text="Contact" class="retro-glow" :continuous="false" intensity="low" />
+        <EffectsGlitchText :text="t('contactTitle')" class="retro-glow" :continuous="false" intensity="low" />
       </h2>
       <p class="mb-12 text-center text-muted-foreground font-display text-lg">
-        <EffectsScrambledText text="Let's get in touch" :speed="40" />
+        <EffectsScrambledText :text="t('contactSubtitle')" :speed="40" />
       </p>
 
       <div class="grid gap-8 md:grid-cols-2">
         <!-- Contact Info -->
         <div class="space-y-6">
           <div>
-            <h3 class="mb-4 text-xl font-semibold">Get in Touch</h3>
+            <h3 class="mb-4 text-xl font-semibold">{{ t('contactGetInTouch') }}</h3>
             <EffectsScrollReveal
-              text="I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!"
+              :text="t('contactIntro')"
               class="text-muted-foreground leading-relaxed"
             />
           </div>
@@ -63,7 +64,7 @@ async function handleSubmit() {
             <div class="flex items-center gap-3">
               <EffectsGlassIcon :icon="Mail" :size="40" color="var(--fx-tint-blue)" />
               <div>
-                <p class="text-sm text-muted-foreground">Email</p>
+                <p class="text-sm text-muted-foreground">{{ t('contactEmail') }}</p>
                 <p class="font-medium">fakhrizon607@gmail.com</p>
               </div>
             </div>
@@ -71,7 +72,7 @@ async function handleSubmit() {
             <div class="flex items-center gap-3">
               <EffectsGlassIcon :icon="MapPin" :size="40" color="var(--fx-tint-green)" />
               <div>
-                <p class="text-sm text-muted-foreground">Location</p>
+                <p class="text-sm text-muted-foreground">{{ t('contactLocation') }}</p>
                 <p class="font-medium">Tangerang, Indonesia</p>
               </div>
             </div>
@@ -81,29 +82,29 @@ async function handleSubmit() {
         <!-- Contact Form -->
         <Card>
           <CardHeader>
-            <CardTitle>Send a Message</CardTitle>
-            <CardDescription>Fill out the form and I'll get back to you as soon as possible.</CardDescription>
+            <CardTitle>{{ t('contactSendTitle') }}</CardTitle>
+            <CardDescription>{{ t('contactSendDesc') }}</CardDescription>
           </CardHeader>
           <CardContent>
             <form class="space-y-4" @submit.prevent="handleSubmit">
               <div class="space-y-2">
-                <label for="name" class="text-sm font-medium leading-none">Name</label>
-                <Input id="name" v-model="form.name" placeholder="Your name" required />
+                <label for="name" class="text-sm font-medium leading-none">{{ t('contactName') }}</label>
+                <Input id="name" v-model="form.name" :placeholder="t('contactNamePlaceholder')" required />
               </div>
               <div class="space-y-2">
                 <label for="email" class="text-sm font-medium leading-none">Email</label>
-                <Input id="email" v-model="form.email" type="email" placeholder="your@email.com" required />
+                <Input id="email" v-model="form.email" type="email" :placeholder="t('contactEmailPlaceholder')" required />
               </div>
               <div class="space-y-2">
-                <label for="message" class="text-sm font-medium leading-none">Message</label>
-                <Textarea id="message" v-model="form.message" placeholder="Your message..." class="min-h-30" required />
+                <label for="message" class="text-sm font-medium leading-none">{{ t('contactMessage') }}</label>
+                <Textarea id="message" v-model="form.message" :placeholder="t('contactMessagePlaceholder')" class="min-h-30" required />
               </div>
               <p v-if="statusMessage" :class="['text-sm', statusType === 'success' ? 'text-primary' : 'text-destructive']">
                 {{ statusMessage }}
               </p>
               <Button type="submit" class="w-full" :disabled="sending">
                 <Send class="mr-2 h-4 w-4" />
-                {{ sending ? 'Sending...' : 'Send Message' }}
+                {{ sending ? t('contactSending') : t('contactSend') }}
               </Button>
             </form>
           </CardContent>
