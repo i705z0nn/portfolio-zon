@@ -4,7 +4,7 @@ import { markRaw } from 'vue'
 
 const dockItems = [
   { icon: markRaw(Home), label: 'Home', href: '#hero' },
-  { icon: markRaw(Github), label: 'GitHub', href: 'https://github.com/mfakhria' },
+  { icon: markRaw(Github), label: 'GitHub', href: 'https://github.com/i705z0nn' },
   { icon: markRaw(Linkedin), label: 'LinkedIn', href: 'https://linkedin.com/in/mfkhria/' },
   { icon: markRaw(Mail), label: 'Email', href: 'mailto:fakhrizon607@gmail.com' },
 ]

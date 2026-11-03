@@ -11,7 +11,7 @@ interface ContributionDay {
 const props = withDefaults(defineProps<{
   username: string
 }>(), {
-  username: 'mfakhria',
+  username: 'i705z0nn',
 })
 
 const contributions = ref<ContributionDay[]>([])
