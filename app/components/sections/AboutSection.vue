@@ -49,7 +49,7 @@ onMounted(async () => {
         <!-- Quick Facts with GlassIcons -->
         <div class="space-y-6">
           <div class="flex items-start gap-4">
-            <EffectsGlassIcon :icon="Code2" :size="48" color="rgba(59, 130, 246, 0.1)" />
+            <EffectsGlassIcon :icon="Code2" :size="48" color="var(--fx-tint-blue)" />
             <div>
               <h3 class="font-semibold">
                 <EffectsCountUp :target="internships.length" :duration="2000" suffix="+ Internship Experiences" />
@@ -61,7 +61,7 @@ onMounted(async () => {
           <Separator />
 
           <div v-if="education" class="flex items-start gap-4">
-            <EffectsGlassIcon :icon="GraduationCap" :size="48" color="rgba(139, 92, 246, 0.1)" />
+            <EffectsGlassIcon :icon="GraduationCap" :size="48" color="var(--fx-tint-purple)" />
             <div>
               <h3 class="font-semibold">{{ education.title }}</h3>
               <p class="text-sm text-muted-foreground">{{ education.company }} — {{ education.description }}</p>
@@ -71,7 +71,7 @@ onMounted(async () => {
           <Separator />
 
           <div class="flex items-start gap-4">
-            <EffectsGlassIcon :icon="Briefcase" :size="48" color="rgba(16, 185, 129, 0.1)" />
+            <EffectsGlassIcon :icon="Briefcase" :size="48" color="var(--fx-tint-green)" />
             <div>
               <h3 class="font-semibold">BNSP Certified</h3>
               <p class="text-sm text-muted-foreground">{{ certifications.map(c => c.title).join(' & ') }}</p>

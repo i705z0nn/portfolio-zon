@@ -40,14 +40,14 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #050a05;
+  background: var(--fx-surface-0);
 }
 
 /* Base dark CRT gradient */
 .gradient-base {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, #0a140a 0%, #060d06 60%, #030503 100%);
+  background: radial-gradient(ellipse at 50% 50%, var(--fx-surface-2) 0%, var(--fx-surface-1) 60%, var(--fx-surface-0) 100%);
 }
 
 /* Animated blobs — retro colors */
@@ -66,7 +66,7 @@
   height: 55vw;
   max-width: 700px;
   max-height: 700px;
-  background: radial-gradient(circle, hsl(120 100% 30% / 0.5) 0%, hsl(120 80% 20% / 0.3) 40%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--fx-glow) 50%, transparent) 0%, color-mix(in srgb, var(--fx-glow) 30%, transparent) 40%, transparent 70%);
   animation-delay: 0s;
   animation-duration: 22s;
 }
@@ -78,7 +78,7 @@
   height: 50vw;
   max-width: 650px;
   max-height: 650px;
-  background: radial-gradient(circle, hsl(180 100% 35% / 0.4) 0%, hsl(180 80% 25% / 0.3) 40%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--fx-cyan) 40%, transparent) 0%, color-mix(in srgb, var(--fx-cyan) 30%, transparent) 40%, transparent 70%);
   animation-delay: -5s;
   animation-duration: 20s;
 }
@@ -90,7 +90,7 @@
   height: 45vw;
   max-width: 600px;
   max-height: 600px;
-  background: radial-gradient(circle, hsl(300 80% 40% / 0.3) 0%, hsl(300 60% 30% / 0.2) 40%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--fx-magenta) 30%, transparent) 0%, color-mix(in srgb, var(--fx-magenta) 20%, transparent) 40%, transparent 70%);
   animation-delay: -10s;
   animation-duration: 25s;
 }
@@ -102,7 +102,7 @@
   height: 50vw;
   max-width: 650px;
   max-height: 650px;
-  background: radial-gradient(circle, hsl(120 100% 40% / 0.35) 0%, hsl(120 80% 25% / 0.2) 40%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--fx-glow) 35%, transparent) 0%, color-mix(in srgb, var(--fx-glow) 20%, transparent) 40%, transparent 70%);
   animation-delay: -7s;
   animation-duration: 19s;
 }
@@ -115,7 +115,7 @@
   height: 40vw;
   max-width: 500px;
   max-height: 500px;
-  background: radial-gradient(circle, hsl(160 80% 30% / 0.2) 0%, hsl(140 60% 20% / 0.1) 50%, transparent 70%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--fx-glow-soft) 20%, transparent) 0%, color-mix(in srgb, var(--fx-glow-soft) 10%, transparent) 50%, transparent 70%);
   animation-delay: -3s;
   animation-duration: 28s;
   opacity: 0.3;
@@ -126,8 +126,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(hsl(120 100% 50% / 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(120 100% 50% / 0.03) 1px, transparent 1px);
+    linear-gradient(color-mix(in srgb, var(--fx-glow) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--fx-glow) 3%, transparent) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, transparent 75%);
@@ -149,11 +149,11 @@
     0deg,
     transparent 0%,
     transparent 42%,
-    hsl(120 100% 50% / 0.02) 42.5%,
-    hsl(120 100% 50% / 0.04) 43%,
+    color-mix(in srgb, var(--fx-glow) 2%, transparent) 42.5%,
+    color-mix(in srgb, var(--fx-glow) 4%, transparent) 43%,
     transparent 44%,
     transparent 67%,
-    hsl(180 100% 50% / 0.025) 67.5%,
+    color-mix(in srgb, var(--fx-cyan) 2.5%, transparent) 67.5%,
     transparent 69%,
     transparent 100%
   );
@@ -165,11 +165,11 @@
     0deg,
     transparent 0%,
     transparent 25%,
-    hsl(300 80% 60% / 0.02) 25.5%,
+    color-mix(in srgb, var(--fx-magenta) 2%, transparent) 25.5%,
     transparent 27%,
     transparent 78%,
-    hsl(120 80% 50% / 0.03) 78.5%,
-    hsl(120 80% 50% / 0.015) 80%,
+    color-mix(in srgb, var(--fx-glow) 3%, transparent) 78.5%,
+    color-mix(in srgb, var(--fx-glow) 1.5%, transparent) 80%,
     transparent 81%,
     transparent 100%
   );
@@ -181,10 +181,10 @@
     0deg,
     transparent 0%,
     transparent 55%,
-    hsl(180 100% 50% / 0.03) 55.5%,
+    color-mix(in srgb, var(--fx-cyan) 3%, transparent) 55.5%,
     transparent 56.5%,
     transparent 88%,
-    hsl(120 100% 45% / 0.02) 88.5%,
+    color-mix(in srgb, var(--fx-glow) 2%, transparent) 88.5%,
     transparent 90%,
     transparent 100%
   );
@@ -214,19 +214,19 @@
       0deg,
       transparent 0%,
       transparent 15.2%,
-      hsl(120 100% 50% / 0.012) 15.3%,
+      color-mix(in srgb, var(--fx-glow) 1.2%, transparent) 15.3%,
       transparent 15.5%,
       transparent 33.7%,
-      hsl(180 100% 50% / 0.015) 33.8%,
+      color-mix(in srgb, var(--fx-cyan) 1.5%, transparent) 33.8%,
       transparent 34.1%,
       transparent 52.4%,
-      hsl(300 80% 60% / 0.01) 52.5%,
+      color-mix(in srgb, var(--fx-magenta) 1%, transparent) 52.5%,
       transparent 52.8%,
       transparent 71.1%,
-      hsl(120 100% 50% / 0.012) 71.2%,
+      color-mix(in srgb, var(--fx-glow) 1.2%, transparent) 71.2%,
       transparent 71.5%,
       transparent 89.6%,
-      hsl(180 100% 50% / 0.01) 89.7%,
+      color-mix(in srgb, var(--fx-cyan) 1%, transparent) 89.7%,
       transparent 90%,
       transparent 100%
     );
@@ -242,8 +242,8 @@
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.06) 2px,
-    rgba(0, 0, 0, 0.06) 4px
+    var(--fx-scanline) 2px,
+    var(--fx-scanline) 4px
   );
   opacity: 0.6;
 }
@@ -252,7 +252,7 @@
 .vignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 40%, rgba(3, 5, 3, 0.7) 100%);
+  background: radial-gradient(ellipse at center, transparent 40%, var(--fx-vignette) 100%);
 }
 
 /* ========== ANIMATIONS ========== */

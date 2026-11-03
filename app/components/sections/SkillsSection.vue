@@ -190,16 +190,16 @@ const orbitIcons = computed(() => {
     <div class="pointer-events-none absolute inset-0">
       <div
         class="absolute left-1/2 top-1/2 h-175 w-175 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-[120px]"
-        style="background: radial-gradient(circle, hsl(120 80% 30% / 0.08) 0%, transparent 70%)"
+        style="background: radial-gradient(circle, color-mix(in srgb, var(--fx-glow) 8%, transparent) 0%, transparent 70%)"
       />
     </div>
 
     <!-- Ocean wave animation -->
     <div class="pointer-events-none absolute inset-x-0 bottom-0 h-48 overflow-hidden opacity-40">
       <svg class="wave-svg absolute bottom-0 w-full" viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path class="wave wave--1" d="M0,120 C240,180 480,60 720,120 C960,180 1200,60 1440,120 L1440,200 L0,200 Z" fill="hsl(120 60% 25% / 0.12)" />
-        <path class="wave wave--2" d="M0,140 C240,100 480,180 720,140 C960,100 1200,180 1440,140 L1440,200 L0,200 Z" fill="hsl(180 80% 30% / 0.08)" />
-        <path class="wave wave--3" d="M0,155 C240,175 480,135 720,155 C960,175 1200,135 1440,155 L1440,200 L0,200 Z" fill="hsl(120 50% 20% / 0.15)" />
+        <path class="wave wave--1" d="M0,120 C240,180 480,60 720,120 C960,180 1200,60 1440,120 L1440,200 L0,200 Z" fill="color-mix(in srgb, var(--fx-glow) 12%, transparent)" />
+        <path class="wave wave--2" d="M0,140 C240,100 480,180 720,140 C960,100 1200,180 1440,140 L1440,200 L0,200 Z" fill="color-mix(in srgb, var(--fx-cyan) 8%, transparent)" />
+        <path class="wave wave--3" d="M0,155 C240,175 480,135 720,155 C960,175 1200,135 1440,155 L1440,200 L0,200 Z" fill="color-mix(in srgb, var(--fx-glow-soft) 15%, transparent)" />
       </svg>
     </div>
 
@@ -369,9 +369,9 @@ const orbitIcons = computed(() => {
   border-radius: 9999px;
   font-size: 0.85rem;
   font-family: var(--font-mono);
-  background: hsl(240 15% 10% / 0.75);
-  border: 1px solid hsl(120 15% 20% / 0.35);
-  color: hsl(0 0% 82%);
+  background: color-mix(in srgb, var(--fx-surface-4) 75%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fx-line-strong) 35%, transparent);
+  color: var(--fx-text-mid);
   white-space: nowrap;
   cursor: default;
   opacity: 0;
@@ -388,9 +388,9 @@ const orbitIcons = computed(() => {
   transform: translateY(0);
 }
 .skill-pill:hover {
-  border-color: hsl(120 60% 30% / 0.5);
-  background: hsl(240 15% 12% / 0.9);
-  box-shadow: 0 0 18px hsl(120 100% 65% / 0.07);
+  border-color: color-mix(in srgb, var(--fx-glow) 50%, transparent);
+  background: color-mix(in srgb, var(--fx-surface-5) 90%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--fx-glow) 7%, transparent);
   transform: translateY(-2px);
 }
 
@@ -419,7 +419,7 @@ const orbitIcons = computed(() => {
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: hsl(180 100% 42%);
+  color: var(--fx-cyan);
 }
 
 /* ── Group Animations ───────────────────────────────────── */

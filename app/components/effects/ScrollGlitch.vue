@@ -90,13 +90,13 @@ onUnmounted(() => {
 .scroll-glitch-active::before {
   background: linear-gradient(
     transparent 0%,
-    hsl(120 100% 65% / 0.03) 20%,
+    color-mix(in srgb, var(--fx-glow) 3%, transparent) 20%,
     transparent 21%,
     transparent 40%,
-    hsl(180 100% 50% / 0.04) 41%,
+    color-mix(in srgb, var(--fx-cyan) 4%, transparent) 41%,
     transparent 42%,
     transparent 65%,
-    hsl(300 100% 60% / 0.03) 66%,
+    color-mix(in srgb, var(--fx-magenta) 3%, transparent) 66%,
     transparent 67%,
     transparent 100%
   );
@@ -108,8 +108,8 @@ onUnmounted(() => {
     0deg,
     transparent,
     transparent 2px,
-    hsl(120 100% 65% / 0.015) 2px,
-    hsl(120 100% 65% / 0.015) 4px
+    color-mix(in srgb, var(--fx-glow) 1.5%, transparent) 2px,
+    color-mix(in srgb, var(--fx-glow) 1.5%, transparent) 4px
   );
   mix-blend-mode: overlay;
 }

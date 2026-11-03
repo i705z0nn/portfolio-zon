@@ -19,15 +19,27 @@ const totalContributions = ref(0)
 const loading = ref(true)
 const error = ref(false)
 
+const { theme } = useTheme()
+
 const endDate = computed(() => new Date())
 
-const rangeColor = [
-  'hsl(120 12% 11% / 0.96)',
-  'hsl(120 36% 24%)',
-  'hsl(120 54% 36%)',
-  'hsl(120 74% 50%)',
-  'hsl(120 96% 68%)',
-]
+const rangeColor = computed(() =>
+  theme.value === 'light'
+    ? [
+        'hsl(80 25% 90%)',
+        'hsl(150 45% 78%)',
+        'hsl(150 60% 60%)',
+        'hsl(150 75% 42%)',
+        'hsl(150 85% 26%)',
+      ]
+    : [
+        'hsl(120 12% 11% / 0.96)',
+        'hsl(120 36% 24%)',
+        'hsl(120 54% 36%)',
+        'hsl(120 74% 50%)',
+        'hsl(120 96% 68%)',
+      ],
+)
 
 async function fetchContributions() {
   loading.value = true
@@ -72,7 +84,7 @@ onMounted(fetchContributions)
           :range-color="rangeColor"
           :round="2"
           :max="20"
-          dark-mode
+          :dark-mode="theme === 'dark'"
           no-data-text="No contributions"
           tooltip-unit="contributions"
         />
@@ -87,7 +99,7 @@ onMounted(fetchContributions)
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: thin;
-  scrollbar-color: hsl(120 60% 25% / 0.4) transparent;
+  scrollbar-color: color-mix(in srgb, var(--fx-line-strong) 40%, transparent) transparent;
 }
 
 .github-calendar::-webkit-scrollbar {
@@ -99,7 +111,7 @@ onMounted(fetchContributions)
 }
 
 .github-calendar::-webkit-scrollbar-thumb {
-  background: hsl(120 60% 25% / 0.4);
+  background: color-mix(in srgb, var(--fx-line-strong) 40%, transparent);
   border-radius: 4px;
 }
 
@@ -113,7 +125,7 @@ onMounted(fetchContributions)
 }
 
 .calendar-wrapper :deep(text) {
-  fill: hsl(120 40% 55%) !important;
+  fill: var(--muted-fg) !important;
   font-family: var(--font-mono) !important;
   font-size: 10px !important;
 }
@@ -121,22 +133,22 @@ onMounted(fetchContributions)
 .calendar-wrapper :deep(rect) {
   rx: 2;
   ry: 2;
-  stroke: hsl(120 18% 8% / 0.92);
+  stroke: color-mix(in srgb, var(--fx-surface-0) 92%, transparent);
   stroke-width: 0.8px;
-  filter: drop-shadow(0 0 3px hsl(120 100% 65% / 0.08));
+  filter: drop-shadow(0 0 3px color-mix(in srgb, var(--fx-glow) 8%, transparent));
 }
 
 .calendar-wrapper :deep(rect:hover) {
-  stroke: hsl(120 100% 78% / 0.82);
+  stroke: color-mix(in srgb, var(--fx-glow) 82%, transparent);
   stroke-width: 1px;
-  filter: drop-shadow(0 0 5px hsl(120 100% 65% / 0.18));
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--fx-glow) 18%, transparent));
 }
 
 .loading-pulse {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: hsl(120 100% 65%);
+  background: var(--primary);
   animation: pulse-glow 1.4s ease-in-out infinite;
 }
 

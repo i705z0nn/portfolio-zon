@@ -162,7 +162,7 @@ onMounted(async () => {
               <div class="project-block__info">
                 <!-- Title -->
                 <div class="flex items-start gap-3 mb-3">
-                  <div class="mt-2 h-1 w-6 rounded-full bg-primary shrink-0 shadow-[0_0_10px_hsl(120_100%_65%/0.6)]" />
+                  <div class="mt-2 h-1 w-6 rounded-full bg-primary shrink-0 shadow-[0_0_10px_var(--fx-glow)]" />
                   <h3 class="font-retro text-lg sm:text-xl lg:text-2xl text-primary retro-glow leading-tight">
                     {{ project.title }}
                   </h3>
@@ -335,7 +335,7 @@ onMounted(async () => {
 
   /* Custom scrollbar */
   scrollbar-width: thin;
-  scrollbar-color: hsl(120 40% 25% / 0.4) transparent;
+  scrollbar-color: color-mix(in srgb, var(--fx-line-strong) 40%, transparent) transparent;
 }
 .scroll-viewport::-webkit-scrollbar {
   width: 4px;
@@ -344,11 +344,11 @@ onMounted(async () => {
   background: transparent;
 }
 .scroll-viewport::-webkit-scrollbar-thumb {
-  background: hsl(120 40% 25% / 0.3);
+  background: color-mix(in srgb, var(--fx-line-strong) 30%, transparent);
   border-radius: 4px;
 }
 .scroll-viewport::-webkit-scrollbar-thumb:hover {
-  background: hsl(120 60% 35% / 0.5);
+  background: color-mix(in srgb, var(--fx-glow) 50%, transparent);
 }
 
 /* ── Project Block ──────────────────────────────────────── */
@@ -420,8 +420,8 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
-  background: linear-gradient(135deg, hsl(120 15% 8%) 0%, hsl(240 15% 6%) 100%);
-  border: 1px solid hsl(120 30% 20% / 0.2);
+  background: linear-gradient(135deg, var(--fx-surface-4) 0%, var(--fx-surface-2) 100%);
+  border: 1px solid color-mix(in srgb, var(--fx-line-strong) 20%, transparent);
 }
 
 /* ── Desktop Frame ──────────────────────────────────────── */
@@ -430,11 +430,11 @@ onMounted(async () => {
   width: 90%;
   border-radius: 0.75rem;
   overflow: hidden;
-  border: 1px solid hsl(120 30% 25% / 0.3);
-  background: hsl(240 15% 6%);
+  border: 1px solid color-mix(in srgb, var(--fx-line-strong) 30%, transparent);
+  background: var(--fx-surface-2);
   box-shadow:
-    0 8px 40px hsl(240 20% 2% / 0.5),
-    0 0 60px hsl(120 60% 20% / 0.06);
+    0 8px 40px color-mix(in srgb, var(--fx-surface-0) 50%, transparent),
+    0 0 60px color-mix(in srgb, var(--fx-glow) 6%, transparent);
   z-index: 1;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.5s ease;
@@ -445,8 +445,8 @@ onMounted(async () => {
 .visual-collage:hover .frame-desktop {
   transform: translateY(-4px);
   box-shadow:
-    0 12px 50px hsl(240 20% 2% / 0.6),
-    0 0 80px hsl(120 60% 20% / 0.1);
+    0 12px 50px color-mix(in srgb, var(--fx-surface-0) 60%, transparent),
+    0 0 80px color-mix(in srgb, var(--fx-glow) 10%, transparent);
 }
 
 .frame-desktop__bar {
@@ -454,19 +454,19 @@ onMounted(async () => {
   align-items: center;
   gap: 5px;
   padding: 8px 12px;
-  background: hsl(240 12% 10%);
-  border-bottom: 1px solid hsl(120 20% 15% / 0.2);
+  background: var(--fx-surface-4);
+  border-bottom: 1px solid color-mix(in srgb, var(--fx-line) 20%, transparent);
 }
 
 .frame-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: hsl(120 30% 25% / 0.5);
+  background: color-mix(in srgb, var(--fx-line-strong) 50%, transparent);
 }
-.frame-dot:first-child { background: hsl(0 60% 45% / 0.6); }
-.frame-dot:nth-child(2) { background: hsl(45 70% 50% / 0.6); }
-.frame-dot:last-child { background: hsl(120 60% 40% / 0.6); }
+.frame-dot:first-child { background: hsl(0 60% 45%); }
+.frame-dot:nth-child(2) { background: hsl(45 70% 50%); }
+.frame-dot:last-child { background: var(--primary); }
 
 .frame-desktop__screen {
   position: relative;
@@ -483,11 +483,11 @@ onMounted(async () => {
   max-width: 140px;
   border-radius: 1rem;
   overflow: hidden;
-  border: 2px solid hsl(120 30% 25% / 0.35);
-  background: hsl(240 15% 6%);
+  border: 2px solid color-mix(in srgb, var(--fx-line-strong) 35%, transparent);
+  background: var(--fx-surface-2);
   box-shadow:
-    0 8px 30px hsl(240 20% 2% / 0.6),
-    0 0 40px hsl(120 60% 20% / 0.06);
+    0 8px 30px color-mix(in srgb, var(--fx-surface-0) 60%, transparent),
+    0 0 40px color-mix(in srgb, var(--fx-glow) 6%, transparent);
   z-index: 2;
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -498,7 +498,7 @@ onMounted(async () => {
 
 .frame-mobile__notch {
   height: 18px;
-  background: hsl(240 12% 10%);
+  background: var(--fx-surface-4);
   position: relative;
 }
 .frame-mobile__notch::after {
@@ -510,7 +510,7 @@ onMounted(async () => {
   width: 36%;
   height: 6px;
   border-radius: 4px;
-  background: hsl(0 0% 15%);
+  background: var(--fx-surface-5);
 }
 
 .frame-mobile__screen {
@@ -535,9 +535,9 @@ onMounted(async () => {
 
 @keyframes img-glitch {
   0%   { clip-path: inset(0); filter: none; }
-  20%  { clip-path: inset(8% 0 85% 0); filter: drop-shadow(3px 0 hsl(120 100% 65% / 0.4)) drop-shadow(-3px 0 hsl(0 100% 50% / 0.3)); }
-  40%  { clip-path: inset(60% 0 10% 0); filter: drop-shadow(-2px 0 hsl(200 100% 60% / 0.35)) drop-shadow(2px 0 hsl(120 100% 65% / 0.3)); }
-  60%  { clip-path: inset(30% 0 40% 0); filter: drop-shadow(2px 0 hsl(120 100% 65% / 0.3)); }
+  20%  { clip-path: inset(8% 0 85% 0); filter: drop-shadow(3px 0 color-mix(in srgb, var(--fx-glow) 40%, transparent)) drop-shadow(-3px 0 color-mix(in srgb, var(--fx-magenta) 30%, transparent)); }
+  40%  { clip-path: inset(60% 0 10% 0); filter: drop-shadow(-2px 0 color-mix(in srgb, var(--fx-cyan) 35%, transparent)) drop-shadow(2px 0 color-mix(in srgb, var(--fx-glow) 30%, transparent)); }
+  60%  { clip-path: inset(30% 0 40% 0); filter: drop-shadow(2px 0 color-mix(in srgb, var(--fx-glow) 30%, transparent)); }
   80%  { clip-path: inset(0); filter: none; }
   100% { clip-path: inset(0); filter: none; }
 }
@@ -568,8 +568,8 @@ onMounted(async () => {
     0deg,
     transparent,
     transparent 2px,
-    hsl(0 0% 0% / 0.06) 2px,
-    hsl(0 0% 0% / 0.06) 4px
+    var(--fx-scanline) 2px,
+    var(--fx-scanline) 4px
   );
 }
 
@@ -580,9 +580,9 @@ onMounted(async () => {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    hsl(120 40% 30% / 0.3) 20%,
-    hsl(120 60% 40% / 0.15) 50%,
-    hsl(120 40% 30% / 0.3) 80%,
+    color-mix(in srgb, var(--fx-line-strong) 30%, transparent) 20%,
+    color-mix(in srgb, var(--fx-glow) 15%, transparent) 50%,
+    color-mix(in srgb, var(--fx-line-strong) 30%, transparent) 80%,
     transparent 100%
   );
 }
@@ -607,7 +607,7 @@ onMounted(async () => {
 .scroll-progress__track {
   position: absolute;
   inset: 0;
-  background: hsl(120 20% 15% / 0.25);
+  background: color-mix(in srgb, var(--fx-line) 25%, transparent);
   border-radius: 2px;
 }
 
@@ -620,10 +620,10 @@ onMounted(async () => {
   border-radius: 2px;
   background: linear-gradient(
     180deg,
-    hsl(120 100% 65%) 0%,
-    hsl(120 80% 50%) 100%
+    var(--fx-glow) 0%,
+    var(--fx-glow-soft) 100%
   );
-  box-shadow: 0 0 10px hsl(120 100% 50% / 0.4);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--fx-glow) 40%, transparent);
   transform-origin: top;
   will-change: transform;
 }
@@ -635,11 +635,11 @@ onMounted(async () => {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: hsl(120 100% 65%);
-  border: 2px solid hsl(240 15% 6%);
+  background: var(--fx-glow);
+  border: 2px solid var(--fx-surface-2);
   box-shadow:
-    0 0 8px hsl(120 100% 50% / 0.6),
-    0 0 20px hsl(120 100% 50% / 0.2);
+    0 0 8px color-mix(in srgb, var(--fx-glow) 60%, transparent),
+    0 0 20px color-mix(in srgb, var(--fx-glow) 20%, transparent);
   will-change: transform;
 }
 
@@ -666,7 +666,7 @@ onMounted(async () => {
   height: 0.5rem;
   border-radius: 50%;
   border: none;
-  background: hsl(120 30% 25% / 0.4);
+  background: color-mix(in srgb, var(--fx-line-strong) 40%, transparent);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -675,12 +675,12 @@ onMounted(async () => {
   width: 0.5rem;
   height: 1.25rem;
   border-radius: 9999px;
-  background: hsl(120 100% 65%);
-  box-shadow: 0 0 10px hsl(120 100% 65% / 0.5);
+  background: var(--fx-glow);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--fx-glow) 50%, transparent);
 }
 
 .scroll-nav__dot:hover:not(.scroll-nav__dot--active) {
-  background: hsl(120 50% 40% / 0.6);
+  background: color-mix(in srgb, var(--fx-glow) 60%, transparent);
   transform: scale(1.3);
 }
 
@@ -693,16 +693,16 @@ onMounted(async () => {
   border-radius: 9999px;
   font-size: 0.75rem;
   font-family: var(--font-mono);
-  background: hsl(120 20% 10% / 0.5);
-  border: 1px solid hsl(120 40% 30% / 0.35);
-  color: hsl(120 60% 75%);
+  background: color-mix(in srgb, var(--fx-surface-4) 50%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fx-line-strong) 35%, transparent);
+  color: var(--primary);
   white-space: nowrap;
   transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
 }
 .tech-chip:hover {
-  border-color: hsl(120 70% 45% / 0.5);
-  background: hsl(120 25% 12% / 0.7);
-  box-shadow: 0 0 12px hsl(120 100% 50% / 0.08);
+  border-color: color-mix(in srgb, var(--fx-glow) 50%, transparent);
+  background: color-mix(in srgb, var(--fx-surface-5) 70%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--fx-glow) 8%, transparent);
 }
 
 .tech-chip__icon {
@@ -719,7 +719,7 @@ onMounted(async () => {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: hsl(120 80% 55%);
+  background: var(--primary);
   flex-shrink: 0;
 }
 
@@ -732,27 +732,27 @@ onMounted(async () => {
   border-radius: 0.5rem;
   font-size: 0.8rem;
   font-family: var(--font-mono);
-  border: 1px solid hsl(120 30% 20% / 0.4);
-  background: hsl(240 15% 8% / 0.6);
-  color: hsl(0 0% 70%);
+  border: 1px solid color-mix(in srgb, var(--fx-line-strong) 40%, transparent);
+  background: color-mix(in srgb, var(--fx-surface-3) 60%, transparent);
+  color: var(--fx-text-dim);
   text-decoration: none;
   transition: all 0.25s ease;
 }
 .project-link:hover {
-  border-color: hsl(120 60% 40% / 0.5);
-  color: hsl(120 80% 70%);
-  box-shadow: 0 0 15px hsl(120 100% 50% / 0.08);
+  border-color: color-mix(in srgb, var(--fx-glow) 50%, transparent);
+  color: var(--primary);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--fx-glow) 8%, transparent);
   transform: translateY(-1px);
 }
 .project-link--primary {
-  border-color: hsl(120 50% 30% / 0.5);
-  background: hsl(120 30% 10% / 0.4);
-  color: hsl(120 70% 70%);
+  border-color: color-mix(in srgb, var(--fx-line-strong) 50%, transparent);
+  background: color-mix(in srgb, var(--fx-surface-4) 40%, transparent);
+  color: var(--primary);
 }
 .project-link--primary:hover {
-  background: hsl(120 35% 13% / 0.6);
-  border-color: hsl(120 80% 50% / 0.5);
-  color: hsl(120 100% 80%);
-  box-shadow: 0 0 20px hsl(120 100% 50% / 0.12);
+  background: color-mix(in srgb, var(--fx-surface-5) 60%, transparent);
+  border-color: color-mix(in srgb, var(--fx-glow) 50%, transparent);
+  color: var(--primary);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--fx-glow) 12%, transparent);
 }
 </style>

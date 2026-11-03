@@ -59,9 +59,6 @@ import { Button } from '~/components/ui/button'
             title="Software Engineer"
             subtitle="Muhammad Fakhri Alauddin"
             badge-image="/lanyard-photo.jpg"
-            strap-color="#0a0a14"
-            badge-bg="rgba(10, 20, 10, 0.6)"
-            accent-color="#33ff66"
           />
         </ClientOnly>
       </div>

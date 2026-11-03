@@ -29,7 +29,7 @@ function rotateCard(e: MouseEvent) {
     glowRef.value.style.backgroundImage = `
       radial-gradient(
         circle at ${center.x * 2 + bounds.width / 2}px ${center.y * 2 + bounds.height / 2}px,
-        rgba(255,255,255,0.15),
+        var(--fx-spotlight),
         transparent 50%
       )
     `
@@ -77,6 +77,6 @@ onUnmounted(() => {
 
 <style scoped>
 .profile-card:hover {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 25px 50px -12px var(--fx-card-hover-shadow);
 }
 </style>

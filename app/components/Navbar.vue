@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { Menu, X } from 'lucide-vue-next'
+import { Menu, X, Sun, Moon } from 'lucide-vue-next'
+import { Button } from '~/components/ui/button'
 
 const isMobileMenuOpen = ref(false)
+const { theme, toggleTheme } = useTheme()
 
 function closeMobileMenu() {
   isMobileMenuOpen.value = false
@@ -85,6 +87,23 @@ const navLinks = [
           </a>
         </div>
 
+        <!-- Theme toggle -->
+        <ClientOnly>
+          <Button
+            variant="ghost"
+            size="icon"
+            class="h-8 w-8 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10"
+            :aria-label="theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+            @click="toggleTheme"
+          >
+            <Sun v-if="theme === 'dark'" class="h-4 w-4" />
+            <Moon v-else class="h-4 w-4" />
+          </Button>
+          <template #fallback>
+            <span class="h-8 w-8" aria-hidden="true" />
+          </template>
+        </ClientOnly>
+
         <!-- Mobile hamburger -->
         <button
           class="inline-flex md:hidden items-center justify-center rounded-full h-8 w-8 text-foreground hover:bg-accent transition-colors"
@@ -94,6 +113,21 @@ const navLinks = [
           <X v-if="isMobileMenuOpen" class="h-4 w-4" />
           <Menu v-else class="h-4 w-4" />
         </button>
+
+        <!-- Theme toggle (mobile) -->
+        <ClientOnly>
+          <button
+            class="inline-flex md:hidden items-center justify-center rounded-full h-8 w-8 text-foreground hover:bg-accent transition-colors"
+            :aria-label="theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'"
+            @click="toggleTheme"
+          >
+            <Sun v-if="theme === 'dark'" class="h-4 w-4" />
+            <Moon v-else class="h-4 w-4" />
+          </button>
+          <template #fallback>
+            <span class="h-8 w-8 md:hidden" aria-hidden="true" />
+          </template>
+        </ClientOnly>
 
 
       </nav>

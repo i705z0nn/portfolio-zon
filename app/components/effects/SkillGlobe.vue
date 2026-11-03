@@ -111,8 +111,8 @@ function getIconPosition(index: number, total: number) {
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    hsl(120 100% 50% / 0.06) 0%,
-    hsl(120 80% 40% / 0.03) 40%,
+    color-mix(in srgb, var(--fx-glow) 6%, transparent) 0%,
+    color-mix(in srgb, var(--fx-glow) 3%, transparent) 40%,
     transparent 70%
   );
   animation: aura-pulse 4s ease-in-out infinite;
@@ -132,17 +132,17 @@ function getIconPosition(index: number, total: number) {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 2px solid hsl(120 60% 35% / 0.5);
+  border: 2px solid color-mix(in srgb, var(--fx-line-strong) 50%, transparent);
   box-shadow:
-    0 0 30px hsl(120 100% 40% / 0.12),
-    0 0 80px hsl(120 80% 30% / 0.06),
-    inset 0 0 50px hsl(240 20% 4% / 0.6),
-    inset 0 0 15px hsl(120 50% 25% / 0.08);
+    0 0 30px color-mix(in srgb, var(--fx-glow) 12%, transparent),
+    0 0 80px color-mix(in srgb, var(--fx-glow) 6%, transparent),
+    inset 0 0 50px color-mix(in srgb, var(--fx-surface-0) 60%, transparent),
+    inset 0 0 15px color-mix(in srgb, var(--fx-glow) 8%, transparent);
   background: radial-gradient(
     circle,
-    hsl(240 15% 6% / 0.9) 30%,
-    hsl(260 25% 10% / 0.75) 60%,
-    hsl(240 15% 5% / 0.4) 100%
+    color-mix(in srgb, var(--fx-surface-2) 90%, transparent) 30%,
+    color-mix(in srgb, var(--fx-surface-3) 75%, transparent) 60%,
+    color-mix(in srgb, var(--fx-surface-1) 40%, transparent) 100%
   );
 }
 
@@ -153,7 +153,7 @@ function getIconPosition(index: number, total: number) {
   border-radius: 50%;
   overflow: hidden;
   opacity: 0.35;
-  background-image: radial-gradient(circle, hsl(120 60% 45% / 0.5) 1px, transparent 1px);
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--fx-glow) 50%, transparent) 1px, transparent 1px);
   background-size: 14px 14px;
   mask-image: radial-gradient(circle, black 55%, transparent 70%);
   -webkit-mask-image: radial-gradient(circle, black 55%, transparent 70%);
@@ -164,13 +164,13 @@ function getIconPosition(index: number, total: number) {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px solid hsl(120 50% 40% / 0.25);
+  border: 1px solid color-mix(in srgb, var(--fx-line-strong) 25%, transparent);
 }
 
 /* Equator — brighter */
 .globe-ring--equator {
   transform: rotateX(90deg);
-  border-color: hsl(120 70% 45% / 0.35);
+  border-color: color-mix(in srgb, var(--fx-glow) 35%, transparent);
 }
 
 /* Latitude lines */
@@ -185,12 +185,12 @@ function getIconPosition(index: number, total: number) {
 .globe-ring--lat3 {
   inset: 45%;
   transform: rotateX(90deg);
-  border-color: hsl(120 40% 35% / 0.18);
+  border-color: color-mix(in srgb, var(--fx-line-strong) 18%, transparent);
 }
 .globe-ring--lat4 {
   inset: 8%;
   transform: rotateX(90deg);
-  border-color: hsl(120 40% 35% / 0.12);
+  border-color: color-mix(in srgb, var(--fx-line-strong) 12%, transparent);
 }
 
 /* Longitude lines */
@@ -205,7 +205,7 @@ function getIconPosition(index: number, total: number) {
 }
 .globe-ring--lon4 {
   transform: rotateY(135deg);
-  border-color: hsl(120 40% 35% / 0.15);
+  border-color: color-mix(in srgb, var(--fx-line-strong) 15%, transparent);
 }
 
 /* Globe center content */
@@ -246,8 +246,8 @@ function getIconPosition(index: number, total: number) {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: hsl(240 15% 10% / 0.8);
-  border: 1px solid hsl(120 20% 22% / 0.3);
+  background: color-mix(in srgb, var(--fx-surface-4) 80%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fx-line-strong) 30%, transparent);
   backdrop-filter: blur(8px);
   transition:
     transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
@@ -259,14 +259,14 @@ function getIconPosition(index: number, total: number) {
 .orbit-icon__svg {
   width: 22px;
   height: 22px;
-  color: hsl(0 0% 80%);
+  color: var(--fx-text-bright);
   transition: color 0.3s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .orbit-icon__label {
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  color: hsl(0 0% 55%);
+  color: var(--fx-text-label);
   white-space: nowrap;
   opacity: 0;
   transform: translateY(-4px);
@@ -278,20 +278,20 @@ function getIconPosition(index: number, total: number) {
 /* Hover effects */
 .orbit-icon--hovered .orbit-icon__inner {
   transform: scale(1.2);
-  border-color: hsl(120 80% 45% / 0.5);
-  box-shadow: 0 0 20px hsl(120 100% 50% / 0.15);
-  background: hsl(240 15% 12% / 0.95);
+  border-color: color-mix(in srgb, var(--fx-glow) 50%, transparent);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--fx-glow) 15%, transparent);
+  background: color-mix(in srgb, var(--fx-surface-5) 95%, transparent);
 }
 
 .orbit-icon--hovered .orbit-icon__svg {
-  color: hsl(120 80% 60%);
+  color: var(--primary);
   transform: rotate(360deg);
 }
 
 .orbit-icon--hovered .orbit-icon__label {
   opacity: 1;
   transform: translateY(0);
-  color: hsl(120 60% 65%);
+  color: var(--primary);
 }
 
 /* ── Keyframes ──────────────────────────────────────────── */

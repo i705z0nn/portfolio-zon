@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
   background-image: linear-gradient(
     120deg,
     transparent 40%,
-    hsl(120 100% 85% / 0.9) 50%,
+    color-mix(in srgb, var(--bg) 10%, var(--fx-glow)) 50%,
     transparent 60%
   );
   background-size: 200% 100%;

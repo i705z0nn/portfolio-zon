@@ -19,7 +19,7 @@ const spotlightStyle = computed(() => {
   const x = props.spotlightX - rect.left
   const y = props.spotlightY - rect.top
   return {
-    background: `radial-gradient(400px circle at ${x}px ${y}px, rgba(255,255,255,0.06), transparent 40%)`,
+    background: `radial-gradient(400px circle at ${x}px ${y}px, var(--fx-spotlight), transparent 40%)`,
   }
 })
 </script>
@@ -28,11 +28,15 @@ const spotlightStyle = computed(() => {
   <div
     ref="cardRef"
     :class="props.class"
-    class="chroma-card group relative overflow-hidden rounded-xl border border-white/10 bg-card transition-all duration-300 hover:border-white/20"
+    class="chroma-card group relative overflow-hidden rounded-xl border bg-card transition-all duration-300"
   >
     <div
       class="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
       :style="spotlightStyle"
+    />
+    <div
+      class="pointer-events-none absolute inset-0 z-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      style="box-shadow: inset 0 0 0 1px var(--fx-glass-border)"
     />
     <slot />
   </div>

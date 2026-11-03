@@ -14,9 +14,9 @@ const props = withDefaults(defineProps<Props>(), {
   badgeImage: '',
   title: 'Full Stack',
   subtitle: 'Web Development',
-  strapColor: '#00ff41',
-  badgeBg: '#0a1a0f',
-  accentColor: '#00ff41',
+  strapColor: '',
+  badgeBg: '',
+  accentColor: '',
 })
 
 // Canvas and DOM refs
@@ -127,6 +127,11 @@ function simulate() {
   }
 }
 
+// Read a CSS custom property from the document (theme-aware)
+function getComputedStyleValue(name: string): string {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+}
+
 function render() {
   const canvas = canvasRef.value
   if (!canvas) return
@@ -145,9 +150,9 @@ function render() {
   for (let i = 1; i < points.length; i++) {
     ctx.lineTo(points[i]!.x, points[i]!.y)
   }
-  ctx.shadowColor = 'rgba(0, 255, 65, 0.7)'
+  ctx.shadowColor = getComputedStyleValue('--fx-strap-glow')
   ctx.shadowBlur = 18
-  ctx.strokeStyle = 'rgba(0, 255, 65, 0.35)'
+  ctx.strokeStyle = getComputedStyleValue('--fx-strap-stroke')
   ctx.lineWidth = 20
   ctx.lineCap = 'round'
   ctx.lineJoin = 'round'
@@ -156,7 +161,7 @@ function render() {
 
   // Strap shadow
   ctx.save()
-  ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'
+  ctx.shadowColor = getComputedStyleValue('--fx-shadow-strong')
   ctx.shadowBlur = 10
   ctx.shadowOffsetX = 2
   ctx.shadowOffsetY = 3
@@ -167,7 +172,7 @@ function render() {
   for (let i = 1; i < points.length; i++) {
     ctx.lineTo(points[i]!.x, points[i]!.y)
   }
-  ctx.strokeStyle = props.strapColor
+  ctx.strokeStyle = getComputedStyleValue('--fx-strap')
   ctx.lineWidth = 10
   ctx.lineCap = 'round'
   ctx.lineJoin = 'round'
@@ -180,7 +185,7 @@ function render() {
   for (let i = 1; i < points.length; i++) {
     ctx.lineTo(points[i]!.x, points[i]!.y)
   }
-  ctx.strokeStyle = 'rgba(180, 255, 200, 0.35)'
+  ctx.strokeStyle = getComputedStyleValue('--fx-strap-highlight')
   ctx.lineWidth = 3
   ctx.lineCap = 'round'
   ctx.stroke()
@@ -193,7 +198,7 @@ function render() {
     ctx.save()
     ctx.translate(p.x, p.y)
     ctx.rotate(angle)
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.12)'
+    ctx.fillStyle = getComputedStyleValue('--fx-strap-text')
     ctx.font = 'bold 6px monospace'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
@@ -213,18 +218,18 @@ function render() {
   // Metal clip
   ctx.beginPath()
   ctx.arc(0, 0, 7, 0, Math.PI * 2)
-  ctx.fillStyle = '#00cc33'
+  ctx.fillStyle = getComputedStyleValue('--fx-clip')
   ctx.fill()
-  ctx.strokeStyle = '#00ff41'
+  ctx.strokeStyle = getComputedStyleValue('--fx-badge-accent')
   ctx.lineWidth = 2
-  ctx.shadowColor = 'rgba(0,255,65,0.8)'
+  ctx.shadowColor = getComputedStyleValue('--fx-clip-glow')
   ctx.shadowBlur = 10
   ctx.stroke()
 
   // Inner hole
   ctx.beginPath()
   ctx.arc(0, 0, 3, 0, Math.PI * 2)
-  ctx.fillStyle = '#050a05'
+  ctx.fillStyle = getComputedStyleValue('--fx-clip-hole')
   ctx.fill()
   ctx.restore()
 
@@ -418,8 +423,8 @@ onUnmounted(() => {
           />
           <div v-else class="badge-photo-placeholder">
             <svg viewBox="0 0 80 80" fill="none" class="w-full h-full">
-              <circle cx="40" cy="30" r="14" fill="rgba(255,255,255,0.6)" />
-              <ellipse cx="40" cy="62" rx="22" ry="16" fill="rgba(255,255,255,0.4)" />
+              <circle cx="40" cy="30" r="14" fill="var(--fx-glass)" />
+              <ellipse cx="40" cy="62" rx="22" ry="16" fill="color-mix(in srgb, var(--fx-glass) 70%, transparent)" />
             </svg>
           </div>
         </div>
@@ -462,18 +467,18 @@ onUnmounted(() => {
   transform-origin: top center;
   z-index: 2;
   filter:
-    drop-shadow(0 0 12px rgba(0, 255, 65, 0.6))
-    drop-shadow(0 0 28px rgba(0, 255, 65, 0.3))
-    drop-shadow(0 16px 40px rgba(0, 0, 0, 0.7));
+    drop-shadow(0 0 12px var(--fx-strap-glow))
+    drop-shadow(0 0 28px var(--fx-strap-stroke))
+    drop-shadow(0 16px 40px var(--fx-shadow-strong));
 }
 
 .badge-inner {
   width: 280px;
-  background: v-bind('props.badgeBg');
+  background: var(--fx-badge-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 18px;
-  border: 1.5px solid rgba(0, 255, 65, 0.35);
+  border: 1.5px solid var(--fx-strap-stroke);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -481,11 +486,11 @@ onUnmounted(() => {
   padding: 28px 22px 24px;
   gap: 16px;
   box-shadow:
-    0 0 0 1px rgba(0, 255, 65, 0.08),
-    0 0 30px rgba(0, 255, 65, 0.08),
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(0, 255, 65, 0.15),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    0 0 0 1px color-mix(in srgb, var(--fx-glow) 8%, transparent),
+    0 0 30px color-mix(in srgb, var(--fx-glow) 8%, transparent),
+    0 8px 32px var(--fx-shadow-strong),
+    inset 0 1px 0 color-mix(in srgb, var(--fx-glow) 15%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--fx-shadow-strong) 20%, transparent);
 }
 
 .badge-photo {
@@ -493,8 +498,8 @@ onUnmounted(() => {
   height: 230px;
   border-radius: 14px;
   overflow: hidden;
-  background: rgba(0, 255, 65, 0.05);
-  border: 1px solid rgba(0, 255, 65, 0.2);
+  background: color-mix(in srgb, var(--fx-glow) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fx-glow) 20%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -524,21 +529,21 @@ onUnmounted(() => {
 .badge-title {
   font-size: 15px;
   font-weight: 700;
-  color: #050a05;
-  background: v-bind('props.accentColor');
+  color: var(--fx-badge-title-fg);
+  background: var(--fx-badge-accent);
   padding: 7px 22px;
   border-radius: 8px;
   letter-spacing: 0.08em;
   text-align: center;
   white-space: nowrap;
-  text-shadow: 0 0 8px rgba(0,0,0,0.4);
-  box-shadow: 0 0 16px rgba(0, 255, 65, 0.4);
+  text-shadow: 0 0 8px var(--fx-shadow-strong);
+  box-shadow: 0 0 16px var(--fx-strap-glow);
 }
 
 .badge-subtitle {
   font-size: 14px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--fx-badge-sub-fg);
   letter-spacing: 0.01em;
   margin-top: 2px;
   text-align: center;

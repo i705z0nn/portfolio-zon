@@ -102,20 +102,20 @@ onMounted(async () => {
           <div class="spaceship">
             <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="spaceship-svg">
               <!-- Main body -->
-              <path d="M10 30 L40 12 L100 18 L115 30 L100 42 L40 48 Z" fill="hsl(240 15% 10%)" stroke="hsl(120 100% 65%)" stroke-width="1.5"/>
+              <path d="M10 30 L40 12 L100 18 L115 30 L100 42 L40 48 Z" fill="var(--fx-surface-4)" stroke="var(--fx-glow)" stroke-width="1.5"/>
               <!-- Cockpit window -->
-              <ellipse cx="85" cy="30" rx="12" ry="7" fill="hsl(120 60% 20%)" stroke="hsl(120 100% 65%)" stroke-width="1"/>
+              <ellipse cx="85" cy="30" rx="12" ry="7" fill="color-mix(in srgb, var(--fx-glow) 20%, var(--fx-surface-2))" stroke="var(--fx-glow)" stroke-width="1"/>
               <!-- Wing top -->
-              <path d="M45 12 L60 2 L75 8 L60 15 Z" fill="hsl(240 15% 8%)" stroke="hsl(120 80% 50%)" stroke-width="1"/>
+              <path d="M45 12 L60 2 L75 8 L60 15 Z" fill="var(--fx-surface-3)" stroke="var(--fx-glow-soft)" stroke-width="1"/>
               <!-- Wing bottom -->
-              <path d="M45 48 L60 58 L75 52 L60 45 Z" fill="hsl(240 15% 8%)" stroke="hsl(120 80% 50%)" stroke-width="1"/>
+              <path d="M45 48 L60 58 L75 52 L60 45 Z" fill="var(--fx-surface-3)" stroke="var(--fx-glow-soft)" stroke-width="1"/>
               <!-- Engine glow -->
-              <circle cx="18" cy="30" r="5" fill="hsl(120 100% 65%)" opacity="0.8"/>
-              <circle cx="18" cy="30" r="8" fill="hsl(120 100% 65%)" opacity="0.3"/>
+              <circle cx="18" cy="30" r="5" fill="var(--fx-glow)" opacity="0.8"/>
+              <circle cx="18" cy="30" r="8" fill="var(--fx-glow)" opacity="0.3"/>
               <!-- Engine trails -->
-              <line x1="13" y1="30" x2="-20" y2="30" stroke="hsl(120 100% 65%)" stroke-width="3" opacity="0.6"/>
-              <line x1="13" y1="26" x2="-15" y2="24" stroke="hsl(180 100% 50%)" stroke-width="1.5" opacity="0.4"/>
-              <line x1="13" y1="34" x2="-15" y2="36" stroke="hsl(180 100% 50%)" stroke-width="1.5" opacity="0.4"/>
+              <line x1="13" y1="30" x2="-20" y2="30" stroke="var(--fx-glow)" stroke-width="3" opacity="0.6"/>
+              <line x1="13" y1="26" x2="-15" y2="24" stroke="var(--fx-cyan)" stroke-width="1.5" opacity="0.4"/>
+              <line x1="13" y1="34" x2="-15" y2="36" stroke="var(--fx-cyan)" stroke-width="1.5" opacity="0.4"/>
             </svg>
           </div>
           <!-- Star streaks -->
@@ -147,7 +147,7 @@ onMounted(async () => {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: hsl(240 20% 3%);
+  background: var(--fx-surface-0);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,8 +164,8 @@ onMounted(async () => {
     0deg,
     transparent,
     transparent 2px,
-    hsl(0 0% 0% / 0.1) 2px,
-    hsl(0 0% 0% / 0.1) 4px
+    var(--fx-scanline) 2px,
+    var(--fx-scanline) 4px
   );
 }
 
@@ -186,12 +186,12 @@ onMounted(async () => {
 .boot-terminal {
   border-radius: 0.75rem;
   overflow: hidden;
-  border: 1px solid hsl(120 40% 25% / 0.5);
-  background: hsl(240 15% 5% / 0.92);
+  border: 1px solid color-mix(in srgb, var(--fx-line-strong) 50%, transparent);
+  background: color-mix(in srgb, var(--fx-surface-1) 92%, transparent);
   backdrop-filter: blur(12px);
   box-shadow:
-    0 0 40px hsl(120 100% 50% / 0.06),
-    0 0 0 1px hsl(120 30% 15% / 0.2);
+    0 0 40px color-mix(in srgb, var(--fx-glow) 6%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--fx-line) 20%, transparent);
 }
 
 .boot-header {
@@ -199,8 +199,8 @@ onMounted(async () => {
   align-items: center;
   gap: 6px;
   padding: 10px 14px;
-  background: hsl(240 12% 8%);
-  border-bottom: 1px solid hsl(120 20% 15% / 0.3);
+  background: var(--fx-surface-3);
+  border-bottom: 1px solid color-mix(in srgb, var(--fx-line) 30%, transparent);
 }
 
 .boot-header__dot {
@@ -210,13 +210,13 @@ onMounted(async () => {
 }
 .boot-header__dot--red { background: hsl(0 60% 45%); }
 .boot-header__dot--yellow { background: hsl(45 70% 50%); }
-.boot-header__dot--green { background: hsl(120 60% 40%); }
+.boot-header__dot--green { background: var(--primary); }
 
 .boot-header__title {
   margin-left: 8px;
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: hsl(120 40% 55%);
+  color: var(--muted-fg);
   letter-spacing: 0.08em;
 }
 
@@ -233,20 +233,20 @@ onMounted(async () => {
   font-family: var(--font-mono);
   font-size: 0.8rem;
   line-height: 1.7;
-  color: hsl(120 50% 55%);
+  color: var(--muted-fg);
   white-space: pre-wrap;
 }
 .boot-line--success {
-  color: hsl(120 80% 65%);
+  color: var(--primary);
 }
 .boot-line--highlight {
-  color: hsl(120 100% 70%);
-  text-shadow: 0 0 10px hsl(120 100% 65% / 0.5);
+  color: var(--primary);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--fx-glow) 50%, transparent);
   font-weight: bold;
 }
 
 .boot-cursor {
-  color: hsl(120 100% 65%);
+  color: var(--primary);
   animation: blink 0.7s step-end infinite;
 }
 
@@ -256,30 +256,30 @@ onMounted(async () => {
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1.25rem;
-  border-top: 1px solid hsl(120 20% 15% / 0.3);
-  background: hsl(240 12% 6%);
+  border-top: 1px solid color-mix(in srgb, var(--fx-line) 30%, transparent);
+  background: var(--fx-surface-2);
 }
 
 .boot-progress__track {
   flex: 1;
   height: 6px;
   border-radius: 3px;
-  background: hsl(120 15% 12%);
+  background: var(--fx-surface-5);
   overflow: hidden;
 }
 
 .boot-progress__fill {
   height: 100%;
   border-radius: 3px;
-  background: linear-gradient(90deg, hsl(120 100% 50%), hsl(120 100% 65%));
-  box-shadow: 0 0 10px hsl(120 100% 50% / 0.5);
+  background: linear-gradient(90deg, var(--fx-glow-soft), var(--fx-glow));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--fx-glow) 50%, transparent);
   transition: width 0.2s ease-out;
 }
 
 .boot-progress__text {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  color: hsl(120 80% 60%);
+  color: var(--primary);
   min-width: 2.5rem;
   text-align: right;
 }
@@ -302,14 +302,14 @@ onMounted(async () => {
 .spaceship-svg {
   width: 140px;
   height: 70px;
-  filter: drop-shadow(0 0 15px hsl(120 100% 50% / 0.4))
-          drop-shadow(0 0 30px hsl(120 100% 50% / 0.15));
+  filter: drop-shadow(0 0 15px color-mix(in srgb, var(--fx-glow) 40%, transparent))
+          drop-shadow(0 0 30px color-mix(in srgb, var(--fx-glow) 15%, transparent));
 }
 
 .warp-text {
   font-family: var(--font-retro);
   font-size: 0.85rem;
-  color: hsl(120 100% 70%);
+  color: var(--primary);
   letter-spacing: 0.2em;
   animation: text-flicker 0.15s ease-in-out 3;
 }
@@ -325,10 +325,10 @@ onMounted(async () => {
   position: absolute;
   width: 2px;
   height: 2px;
-  background: hsl(120 80% 70%);
+  background: var(--primary);
   border-radius: 50%;
   animation: star-streak linear forwards;
-  box-shadow: 0 0 4px hsl(120 100% 65% / 0.6);
+  box-shadow: 0 0 4px color-mix(in srgb, var(--fx-glow) 60%, transparent);
 }
 
 /* ── Vignette ───────────────────────────────────────────── */
@@ -337,12 +337,12 @@ onMounted(async () => {
   inset: 0;
   pointer-events: none;
   z-index: 4;
-  background: radial-gradient(ellipse at center, transparent 40%, hsl(240 20% 2% / 0.6) 100%);
+  background: radial-gradient(ellipse at center, transparent 40%, color-mix(in srgb, var(--fx-surface-0) 60%, transparent) 100%);
 }
 
 /* ── Warp screen effect ─────────────────────────────────── */
 .loading-screen--warp {
-  background: hsl(240 25% 2%);
+  background: var(--fx-surface-0);
 }
 
 /* ── Exit transition ────────────────────────────────────── */

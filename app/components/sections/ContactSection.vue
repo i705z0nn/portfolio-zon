@@ -61,7 +61,7 @@ async function handleSubmit() {
 
           <div class="space-y-4">
             <div class="flex items-center gap-3">
-              <EffectsGlassIcon :icon="Mail" :size="40" color="rgba(59, 130, 246, 0.1)" />
+              <EffectsGlassIcon :icon="Mail" :size="40" color="var(--fx-tint-blue)" />
               <div>
                 <p class="text-sm text-muted-foreground">Email</p>
                 <p class="font-medium">fakhrizon607@gmail.com</p>
@@ -69,7 +69,7 @@ async function handleSubmit() {
             </div>
 
             <div class="flex items-center gap-3">
-              <EffectsGlassIcon :icon="MapPin" :size="40" color="rgba(16, 185, 129, 0.1)" />
+              <EffectsGlassIcon :icon="MapPin" :size="40" color="var(--fx-tint-green)" />
               <div>
                 <p class="text-sm text-muted-foreground">Location</p>
                 <p class="font-medium">Tangerang, Indonesia</p>
@@ -98,7 +98,7 @@ async function handleSubmit() {
                 <label for="message" class="text-sm font-medium leading-none">Message</label>
                 <Textarea id="message" v-model="form.message" placeholder="Your message..." class="min-h-30" required />
               </div>
-              <p v-if="statusMessage" :class="['text-sm', statusType === 'success' ? 'text-green-400' : 'text-red-400']">
+              <p v-if="statusMessage" :class="['text-sm', statusType === 'success' ? 'text-primary' : 'text-destructive']">
                 {{ statusMessage }}
               </p>
               <Button type="submit" class="w-full" :disabled="sending">

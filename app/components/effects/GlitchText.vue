@@ -54,12 +54,12 @@ const props = withDefaults(defineProps<Props>(), {
 }
 
 .glitch-text::before {
-  color: hsl(180 100% 50%); /* cyan */
+  color: var(--fx-cyan);
   z-index: -1;
 }
 
 .glitch-text::after {
-  color: hsl(300 100% 60%); /* magenta */
+  color: var(--fx-magenta);
   z-index: -1;
 }
 

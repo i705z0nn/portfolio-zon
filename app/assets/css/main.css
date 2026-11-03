@@ -1,42 +1,176 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* ============================================================
+   THEME TOKENS
+   Dark  = retro CRT terminal (green on black)
+   Light = paper terminal (dark green on cream paper)
+   ============================================================ */
+
+:root {
+  /* Dark theme (default) */
+  --bg: hsl(240 20% 4%);
+  --fg: hsl(120 100% 80%);
+  --card: hsl(240 15% 8% / 0.85);
+  --card-fg: hsl(120 100% 80%);
+  --popover: hsl(240 15% 8%);
+  --popover-fg: hsl(120 100% 80%);
+  --primary: hsl(120 100% 65%);
+  --primary-fg: hsl(240 20% 4%);
+  --secondary: hsl(280 80% 60%);
+  --secondary-fg: hsl(120 100% 90%);
+  --muted: hsl(240 15% 12%);
+  --muted-fg: hsl(120 40% 55%);
+  --accent: hsl(180 100% 40%);
+  --accent-fg: hsl(240 20% 4%);
+  --destructive: hsl(0 80% 50%);
+  --destructive-fg: hsl(0 0% 98%);
+  --border: hsl(120 60% 25% / 0.4);
+  --input: hsl(240 15% 14%);
+  --ring: hsl(120 100% 65%);
+
+  /* Effect tokens — dark */
+  --fx-surface-0: hsl(240 20% 3%);
+  --fx-surface-1: hsl(240 15% 5%);
+  --fx-surface-2: hsl(240 15% 6%);
+  --fx-surface-3: hsl(240 12% 8%);
+  --fx-surface-4: hsl(240 12% 10%);
+  --fx-surface-5: hsl(240 15% 12%);
+  --fx-line: hsl(120 20% 15%);
+  --fx-line-strong: hsl(120 30% 25%);
+  --fx-glow: hsl(120 100% 65%);
+  --fx-glow-soft: hsl(120 100% 50%);
+  --fx-cyan: hsl(180 100% 50%);
+  --fx-magenta: hsl(300 100% 60%);
+  --fx-text-dim: hsl(0 0% 70%);
+  --fx-text-mid: hsl(0 0% 82%);
+  --fx-text-bright: hsl(0 0% 80%);
+  --fx-text-label: hsl(0 0% 55%);
+  --fx-scanline: rgba(0, 0, 0, 0.15);
+  --fx-vignette: rgba(3, 5, 3, 0.7);
+  --fx-shadow-strong: rgba(0, 0, 0, 0.5);
+  --fx-shadow-soft: rgba(0, 0, 0, 0.25);
+  --fx-glass: rgba(255, 255, 255, 0.15);
+  --fx-glass-border: rgba(255, 255, 255, 0.2);
+  --fx-glass-shine: rgba(255, 255, 255, 0.2);
+  --fx-spotlight: rgba(255, 255, 255, 0.06);
+  --fx-card-hover-shadow: rgba(0, 0, 0, 0.25);
+  --fx-strap: #0a0a14;
+  --fx-badge-bg: rgba(10, 20, 10, 0.6);
+  --fx-badge-accent: #33ff66;
+  --fx-badge-title-fg: #050a05;
+  --fx-badge-sub-fg: rgba(255, 255, 255, 0.8);
+  --fx-clip: #00cc33;
+  --fx-clip-glow: rgba(0, 255, 65, 0.8);
+  --fx-strap-glow: rgba(0, 255, 65, 0.7);
+  --fx-strap-stroke: rgba(0, 255, 65, 0.35);
+  --fx-strap-highlight: rgba(180, 255, 200, 0.35);
+  --fx-strap-text: rgba(255, 255, 255, 0.12);
+  --fx-clip-hole: #050a05;
+  --fx-aurora-1: #3A29FF;
+  --fx-aurora-2: #FF94B4;
+  --fx-aurora-3: #FF3232;
+  --fx-tint-blue: rgba(59, 130, 246, 0.1);
+  --fx-tint-purple: rgba(139, 92, 246, 0.1);
+  --fx-tint-green: rgba(16, 185, 129, 0.1);
+}
+
+/* Light theme — paper terminal */
+html.light {
+  --bg: hsl(80 30% 94%);
+  --fg: hsl(60 8% 16%);
+  --card: hsl(60 40% 97% / 0.85);
+  --card-fg: hsl(60 8% 16%);
+  --popover: hsl(60 40% 97%);
+  --popover-fg: hsl(60 8% 16%);
+  --primary: hsl(150 85% 24%);
+  --primary-fg: hsl(60 40% 97%);
+  --secondary: hsl(280 60% 45%);
+  --secondary-fg: hsl(60 40% 97%);
+  --muted: hsl(70 20% 88%);
+  --muted-fg: hsl(60 8% 38%);
+  --accent: hsl(180 80% 28%);
+  --accent-fg: hsl(60 40% 97%);
+  --destructive: hsl(0 70% 45%);
+  --destructive-fg: hsl(0 0% 98%);
+  --border: hsl(60 10% 30% / 0.35);
+  --input: hsl(70 25% 90%);
+  --ring: hsl(150 85% 24%);
+
+  /* Effect tokens — light */
+  --fx-surface-0: hsl(70 25% 90%);
+  --fx-surface-1: hsl(60 40% 96%);
+  --fx-surface-2: hsl(60 35% 94%);
+  --fx-surface-3: hsl(65 30% 92%);
+  --fx-surface-4: hsl(65 28% 90%);
+  --fx-surface-5: hsl(65 25% 87%);
+  --fx-line: hsl(60 10% 40% / 0.25);
+  --fx-line-strong: hsl(60 10% 35%);
+  --fx-glow: hsl(150 85% 24%);
+  --fx-glow-soft: hsl(150 75% 30%);
+  --fx-cyan: hsl(185 80% 30%);
+  --fx-magenta: hsl(320 60% 45%);
+  --fx-text-dim: hsl(60 8% 35%);
+  --fx-text-mid: hsl(60 8% 20%);
+  --fx-text-bright: hsl(60 8% 18%);
+  --fx-text-label: hsl(60 8% 40%);
+  --fx-scanline: rgba(0, 0, 0, 0.05);
+  --fx-vignette: rgba(120, 110, 80, 0.25);
+  --fx-shadow-strong: rgba(90, 85, 60, 0.3);
+  --fx-shadow-soft: rgba(90, 85, 60, 0.15);
+  --fx-glass: rgba(255, 255, 255, 0.5);
+  --fx-glass-border: rgba(150, 140, 100, 0.3);
+  --fx-glass-shine: rgba(255, 255, 255, 0.45);
+  --fx-spotlight: rgba(255, 255, 255, 0.5);
+  --fx-card-hover-shadow: rgba(90, 85, 60, 0.2);
+  --fx-strap: hsl(150 40% 30%);
+  --fx-badge-bg: hsl(60 40% 97% / 0.85);
+  --fx-badge-accent: hsl(150 85% 24%);
+  --fx-badge-title-fg: hsl(60 40% 97%);
+  --fx-badge-sub-fg: hsl(60 8% 25%);
+  --fx-clip: hsl(150 60% 35%);
+  --fx-clip-glow: rgba(20, 120, 60, 0.4);
+  --fx-strap-glow: rgba(20, 120, 60, 0.35);
+  --fx-strap-stroke: rgba(20, 120, 60, 0.3);
+  --fx-strap-highlight: rgba(255, 255, 255, 0.4);
+  --fx-strap-text: rgba(255, 255, 255, 0.35);
+  --fx-clip-hole: hsl(60 40% 97%);
+  --fx-aurora-1: #7d9b7d;
+  --fx-aurora-2: #d4c9a8;
+  --fx-aurora-3: #a8b89a;
+  --fx-tint-blue: rgba(59, 130, 246, 0.12);
+  --fx-tint-purple: rgba(139, 92, 246, 0.1);
+  --fx-tint-green: rgba(16, 185, 129, 0.12);
+}
+
 @theme inline {
   --font-retro: "Press Start 2P", monospace;
   --font-mono: "Space Mono", monospace;
   --font-display: "VT323", monospace;
 
-  --color-background: hsl(240 20% 4%);
-  --color-foreground: hsl(120 100% 80%);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-fg);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-fg);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-fg);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-fg);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-fg);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-fg);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-fg);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 
-  --color-card: hsl(240 15% 8% / 0.85);
-  --color-card-foreground: hsl(120 100% 80%);
-
-  --color-popover: hsl(240 15% 8%);
-  --color-popover-foreground: hsl(120 100% 80%);
-
-  --color-primary: hsl(120 100% 65%);
-  --color-primary-foreground: hsl(240 20% 4%);
-
-  --color-secondary: hsl(280 80% 60%);
-  --color-secondary-foreground: hsl(120 100% 90%);
-
-  --color-muted: hsl(240 15% 12%);
-  --color-muted-foreground: hsl(120 40% 55%);
-
-  --color-accent: hsl(180 100% 40%);
-  --color-accent-foreground: hsl(240 20% 4%);
-
-  --color-destructive: hsl(0 80% 50%);
-  --color-destructive-foreground: hsl(0 0% 98%);
-
-  --color-border: hsl(120 60% 25% / 0.4);
-  --color-input: hsl(240 15% 14%);
-  --color-ring: hsl(120 100% 65%);
-
-  --color-retro-glow: hsl(120 100% 65%);
-  --color-retro-cyan: hsl(180 100% 50%);
-  --color-retro-magenta: hsl(300 100% 60%);
+  --color-retro-glow: var(--fx-glow);
+  --color-retro-cyan: var(--fx-cyan);
+  --color-retro-magenta: var(--fx-magenta);
   --color-retro-amber: hsl(40 100% 55%);
 
   --radius: 0.25rem;
@@ -48,7 +182,7 @@
   }
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-background);
+    background-color: var(--bg);
   }
   body {
     @apply bg-background text-foreground;
@@ -70,39 +204,39 @@
       0deg,
       transparent,
       transparent 2px,
-      rgba(0, 0, 0, 0.15) 2px,
-      rgba(0, 0, 0, 0.15) 4px
+      var(--fx-scanline) 2px,
+      var(--fx-scanline) 4px
     );
     z-index: 50;
   }
 
   .retro-glow {
     text-shadow:
-      0 0 7px hsl(120 100% 65%),
-      0 0 10px hsl(120 100% 65% / 0.5),
-      0 0 21px hsl(120 100% 65% / 0.3),
-      0 0 42px hsl(120 100% 40% / 0.2);
+      0 0 7px var(--fx-glow),
+      0 0 10px color-mix(in srgb, var(--fx-glow) 50%, transparent),
+      0 0 21px color-mix(in srgb, var(--fx-glow) 30%, transparent),
+      0 0 42px color-mix(in srgb, var(--fx-glow) 20%, transparent);
   }
 
   .retro-glow-cyan {
     text-shadow:
-      0 0 7px hsl(180 100% 50%),
-      0 0 10px hsl(180 100% 50% / 0.5),
-      0 0 21px hsl(180 100% 50% / 0.3);
+      0 0 7px var(--fx-cyan),
+      0 0 10px color-mix(in srgb, var(--fx-cyan) 50%, transparent),
+      0 0 21px color-mix(in srgb, var(--fx-cyan) 30%, transparent);
   }
 
   .retro-glow-magenta {
     text-shadow:
-      0 0 7px hsl(300 100% 60%),
-      0 0 10px hsl(300 100% 60% / 0.5),
-      0 0 21px hsl(300 100% 60% / 0.3);
+      0 0 7px var(--fx-magenta),
+      0 0 10px color-mix(in srgb, var(--fx-magenta) 50%, transparent),
+      0 0 21px color-mix(in srgb, var(--fx-magenta) 30%, transparent);
   }
 
   .retro-box-glow {
     box-shadow:
-      0 0 5px hsl(120 100% 65% / 0.3),
-      0 0 15px hsl(120 100% 65% / 0.15),
-      inset 0 0 5px hsl(120 100% 65% / 0.05);
+      0 0 5px color-mix(in srgb, var(--fx-glow) 30%, transparent),
+      0 0 15px color-mix(in srgb, var(--fx-glow) 15%, transparent),
+      inset 0 0 5px color-mix(in srgb, var(--fx-glow) 5%, transparent);
   }
 
   .retro-flicker {
@@ -114,10 +248,10 @@
   }
 
   .retro-pixel-border {
-    border: 2px solid hsl(120 100% 65% / 0.5);
+    border: 2px solid color-mix(in srgb, var(--fx-glow) 50%, transparent);
     box-shadow:
-      3px 3px 0 hsl(120 100% 65% / 0.2),
-      -1px -1px 0 hsl(120 100% 65% / 0.1);
+      3px 3px 0 color-mix(in srgb, var(--fx-glow) 20%, transparent),
+      -1px -1px 0 color-mix(in srgb, var(--fx-glow) 10%, transparent);
   }
 
   .font-retro {
@@ -141,4 +275,19 @@
 @keyframes blink {
   0%, 50% { opacity: 1; }
   50.01%, 100% { opacity: 0; }
+}
+
+/* Theme transition — smooth color switch */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
+    fill 0.3s ease,
+    stroke 0.3s ease,
+    box-shadow 0.3s ease,
+    text-shadow 0.3s ease !important;
 }
