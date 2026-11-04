@@ -70,9 +70,36 @@ const currentPhase = computed(
     phases[phases.length - 1]!,
 )
 
+// ── Cross-tab sync: broadcast active phase to other tabs (e.g. home page) ──
+const pitchChannel = ref<BroadcastChannel | null>(null)
+
+onMounted(() => {
+  if (typeof BroadcastChannel !== 'undefined') {
+    pitchChannel.value = new BroadcastChannel('portfolio-pitch')
+  }
+})
+
+onUnmounted(() => {
+  if (timerId) clearInterval(timerId)
+  pitchChannel.value?.close()
+})
+
+// Broadcast whenever the active phase changes
+watch(currentPhase, (phase) => {
+  pitchChannel.value?.postMessage({ type: 'phase', key: phase.key, label: phase.label })
+})
+
+watch(isRunning, (running) => {
+  if (!running) {
+    pitchChannel.value?.postMessage({ type: 'phase', key: null, label: null })
+  }
+})
+
 function start() {
   if (isRunning.value || isFinished.value) return
   isRunning.value = true
+  // Broadcast the current phase immediately on start
+  pitchChannel.value?.postMessage({ type: 'phase', key: currentPhase.value.key, label: currentPhase.value.label })
   timerId = setInterval(() => {
     elapsed.value = Math.min(TOTAL_SECONDS, elapsed.value + 1)
     if (elapsed.value >= TOTAL_SECONDS) pause()
@@ -90,11 +117,14 @@ function pause() {
 function reset() {
   pause()
   elapsed.value = 0
+  pitchChannel.value?.postMessage({ type: 'phase', key: null, label: null })
 }
 
-onUnmounted(() => {
-  if (timerId) clearInterval(timerId)
-})
+// Manual jump: click a phase card to move the timer to that phase's start
+function jumpToPhase(p: Phase) {
+  elapsed.value = p.start
+  pitchChannel.value?.postMessage({ type: 'phase', key: p.key, label: p.label })
+}
 
 function formatRange(p: Phase) {
   const fmt = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
@@ -176,15 +206,18 @@ function formatRange(p: Phase) {
 
       <!-- Phase cards -->
       <div class="grid gap-4 md:grid-cols-2">
-        <div
+        <button
           v-for="p in phases"
           :key="p.key"
-          class="group rounded-lg border p-5 transition-all duration-300"
+          type="button"
+          class="group rounded-lg border p-5 text-left transition-all duration-300 hover:border-primary/40 hover:bg-primary/5"
           :class="
             currentPhase.key === p.key
               ? 'border-primary/50 bg-primary/5 shadow-[0_0_20px_var(--fx-glow)]'
               : 'border-primary/20 bg-card/60 backdrop-blur-sm'
           "
+          :aria-label="`Lompat ke fase ${p.label}`"
+          @click="jumpToPhase(p)"
         >
           <div class="mb-3 flex items-center justify-between gap-2">
             <h3 class="font-retro text-[11px] uppercase tracking-wider" :class="currentPhase.key === p.key ? 'text-primary retro-glow' : 'text-foreground'">
@@ -197,7 +230,13 @@ function formatRange(p: Phase) {
           <p class="whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
             {{ p.script }}
           </p>
-        </div>
+          <span
+            class="mt-3 inline-flex items-center gap-1 text-[10px] font-mono text-muted-foreground/60 transition-colors group-hover:text-primary"
+            :class="currentPhase.key === p.key ? 'text-primary' : ''"
+          >
+            ▶ {{ currentPhase.key === p.key ? 'Sedang berjalan' : 'Klik untuk lompat ke fase ini' }}
+          </span>
+        </button>
       </div>
     </div>
   </div>

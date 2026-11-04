@@ -17,6 +17,7 @@ useHead({
       <ScrollProgress />
       <NuxtRouteAnnouncer />
       <Navbar />
+      <PitchSync />
       <EffectsScrollGlitch :threshold="60" :duration="250" :cooldown="1000">
         <main>
           <SectionsHeroSection />
